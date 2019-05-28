@@ -1,3 +1,4 @@
+#import libraries
 import numpy as np
 import matplotlib.pyplot as plt
 import keras
@@ -14,32 +15,31 @@ import pandas as pd
 import cv2
 import os
 
+#clones training data from bitbucket repo.
 myCmd = 'git clone https://bitbucket.org/jadslim/german-traffic-signs \n ls german-traffic-sign'
 os.system(myCmd)
 
 np.random.seed(0)
 
-# training data
+# saves the training, validation, and test data as f and pickles them
 with open('german-traffic-signs/train.p', 'rb') as f:
     train_data = pickle.load(f)
-# validation set
 with open('german-traffic-signs/valid.p', 'rb') as f:
     val_data = pickle.load(f)
-# TODO: Load test data
 with open('german-traffic-signs/test.p', 'rb') as f:
     test_data = pickle.load(f)
 
-# Split out features and labels
+# stores feautres (the image) and labels
 X_train, y_train = train_data['features'], train_data['labels']
 X_val, y_val = val_data['features'], val_data['labels']
 X_test, y_test = test_data['features'], test_data['labels']
 
-#already 4 dimensional
+#prints how many images there are, the size of the images, and how many color channels it has.
 print(X_train.shape)
 print(X_test.shape)
 print(X_val.shape)
 
-# STOP: Do not change the tests below. Your implementation should pass these tests.
+# checks if all the numberes are correct and correspond.
 assert(X_train.shape[0] == y_train.shape[0]), "The number of images is not equal to the number of labels."
 assert(X_train.shape[1:] == (32,32,3)), "The dimensions of the images are not 32 x 32 x 3."
 assert(X_val.shape[0] == y_val.shape[0]), "The number of images is not equal to the number of labels."
@@ -47,6 +47,7 @@ assert(X_val.shape[1:] == (32,32,3)), "The dimensions of the images are not 32 x
 assert(X_test.shape[0] == y_test.shape[0]), "The number of images is not equal to the number of labels."
 assert(X_test.shape[1:] == (32,32,3)), "The dimensions of the images are not 32 x 32 x 3."
 
+#imports the names of the different signs
 data = pd.read_csv('german-traffic-signs/signnames.csv')
 
 num_of_samples=[]
