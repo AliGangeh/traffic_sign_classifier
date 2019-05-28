@@ -188,7 +188,7 @@ print(model.summary())
 
 history = model.fit_generator(datagen.flow(X_train, y_train, batch_size=50),
                             steps_per_epoch=2000,
-                            epochs=1,
+                            epochs=10,
                             validation_data=(X_val, y_val), shuffle = 1)
 
 #plots loss
